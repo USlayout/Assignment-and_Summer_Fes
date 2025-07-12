@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UsefulApp - ホーム</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+        }
+        .feature-card {
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- ナビゲーションバー -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="{% url 'home' %}">UsefulApp</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">ホーム</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'image_combine' %}">画像結合</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#dictionary">辞書検索</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ヒーローセクション -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-4">UsefulApp</h1>
+            <p class="lead mb-4">画像結合と辞書検索の便利なWebアプリケーション</p>
+            <p class="fs-5">Djangoで構築された多機能ツール</p>
+        </div>
+    </section>
+
+    <!-- 機能紹介セクション -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col">
+                    <h2 class="fw-bold">主な機能</h2>
+                    <p class="text-muted">使いやすいツールで作業効率をアップ</p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <!-- 画像結合機能 -->
+                <div class="col-md-6">
+                    <div class="card feature-card border-0 shadow-sm h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon text-primary">
+                                🖼️
+                            </div>
+                            <h4 class="card-title fw-bold mb-3">画像結合機能</h4>
+                            <p class="card-text text-muted mb-4">
+                                複数の画像を簡単に結合できます。縦方向・横方向の結合に対応し、
+                                結合後の画像はすぐにダウンロード可能です。
+                            </p>
+                            <ul class="list-unstyled text-start mb-4">
+                                <li class="mb-2">✓ 複数画像のアップロード</li>
+                                <li class="mb-2">✓ 縦・横方向の結合</li>
+                                <li class="mb-2">✓ ワンクリックダウンロード</li>
+                            </ul>
+                            <a href="{% url 'image_combine' %}" class="btn btn-primary btn-lg">画像結合を開始</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 辞書検索機能 -->
+                <div class="col-md-6">
+                    <div class="card feature-card border-0 shadow-sm h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon text-success">
+                                📚
+                            </div>
+                            <h4 class="card-title fw-bold mb-3">辞書検索機能</h4>
+                            <p class="card-text text-muted mb-4">
+                                外部辞書APIを活用した高精度な単語検索。検索履歴は自動保存され、
+                                いつでも過去の検索結果を確認できます。
+                            </p>
+                            <ul class="list-unstyled text-start mb-4">
+                                <li class="mb-2">✓ 外部API連携検索</li>
+                                <li class="mb-2">✓ 検索履歴の保存</li>
+                                <li class="mb-2">✓ 履歴の管理・削除</li>
+                            </ul>
+                            <a href="#dictionary" class="btn btn-success btn-lg">辞書検索を開始</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技術スタック -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col">
+                    <h3 class="fw-bold">使用技術</h3>
+                    <p class="text-muted">モダンな技術スタックで構築</p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-3 mb-3">
+                    <div class="p-3">
+                        <h5 class="fw-bold">Django</h5>
+                        <p class="text-muted small">Webフレームワーク</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="p-3">
+                        <h5 class="fw-bold">SQLite3</h5>
+                        <p class="text-muted small">データベース</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="p-3">
+                        <h5 class="fw-bold">Pillow</h5>
+                        <p class="text-muted small">画像処理</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="p-3">
+                        <h5 class="fw-bold">Requests</h5>
+                        <p class="text-muted small">API連携</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2025 UsefulApp - 学校課題・部活動制作物</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

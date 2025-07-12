@@ -1,0 +1,336 @@
+/* トップページ専用スタイル */
+
+/* ヒーローセクション */
+.hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.hero-description {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+/* 機能グリッド */
+.features-section {
+    padding: 80px 0;
+    background-color: #f8f9fa;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.feature-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* ホバー効果は feature-card-link で制御 */
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--card-color, #007bff), var(--card-color-light, #66b3ff));
+}
+
+.feature-card.image-combine {
+    --card-color: #007bff;
+    --card-color-light: #66b3ff;
+}
+
+.feature-card.dictionary {
+    --card-color: #28a745;
+    --card-color-light: #66d689;
+}
+
+.feature-card.coming-soon {
+    --card-color: #6c757d;
+    --card-color-light: #adb5bd;
+}
+
+.feature-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+}
+
+.feature-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.feature-description {
+    color: #666;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.feature-tags {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.feature-tags li {
+    font-size: 0.85rem;
+    color: #777;
+    margin-bottom: 0.3rem;
+}
+
+.feature-tags li::before {
+    content: '✓';
+    color: var(--card-color, #007bff);
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+.feature-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    margin-top: auto;
+    display: inline-block;
+    pointer-events: none; /* カード全体のクリックを優先 */
+}
+
+.feature-btn:hover {
+    transform: scale(1.05);
+    text-decoration: none;
+}
+
+.btn-primary-custom {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+}
+
+.btn-primary-custom:hover {
+    background: linear-gradient(135deg, #0056b3, #004085);
+    color: white;
+}
+
+.btn-success-custom {
+    background: linear-gradient(135deg, #28a745, #1e7e34);
+    color: white;
+}
+
+.btn-success-custom:hover {
+    background: linear-gradient(135deg, #1e7e34, #155724);
+    color: white;
+}
+
+.btn-secondary-custom {
+    background: linear-gradient(135deg, #6c757d, #495057);
+    color: white;
+}
+
+.btn-secondary-custom:hover {
+    background: linear-gradient(135deg, #495057, #343a40);
+    color: white;
+}
+
+/* 技術スタック */
+.tech-section {
+    padding: 60px 0;
+    background: white;
+}
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.tech-item {
+    text-align: center;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.tech-item:hover {
+    transform: translateY(-5px);
+}
+
+.tech-name {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.tech-description {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* フッター */
+.footer {
+    background: #343a40;
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+/* 機能カードリンク */
+.feature-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.feature-card-link:hover,
+.feature-card-link:focus {
+    text-decoration: none;
+    color: inherit;
+    outline: none;
+}
+
+.feature-card-link:focus {
+    outline: 3px solid #007bff;
+    outline-offset: 2px;
+    border-radius: 15px;
+}
+
+.coming-soon-trigger:focus {
+    outline: 3px solid #6c757d;
+    outline-offset: 2px;
+    border-radius: 15px;
+}
+
+/* アクティブ状態 */
+.feature-card-link:active .feature-card,
+.coming-soon-trigger:active .feature-card {
+    transform: scale(0.95);
+}
+
+.feature-card-link:hover .feature-card {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.coming-soon-trigger {
+    cursor: pointer;
+}
+
+.coming-soon-trigger:hover .feature-card {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .feature-card {
+        padding: 1.5rem;
+    }
+    
+    .feature-icon {
+        font-size: 3rem;
+    }
+    
+    .tech-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .tech-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* アニメーション */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.feature-card {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.feature-card:nth-child(1) { animation-delay: 0.1s; }
+.feature-card:nth-child(2) { animation-delay: 0.2s; }
+.feature-card:nth-child(3) { animation-delay: 0.3s; }
+.feature-card:nth-child(4) { animation-delay: 0.4s; }

@@ -90,9 +90,19 @@
     --card-color-light: #66b3ff;
 }
 
+.feature-card.qr-generator {
+    --card-color: #fd7e14;
+    --card-color-light: #ffb366;
+}
+
 .feature-card.dictionary {
     --card-color: #28a745;
     --card-color-light: #66d689;
+}
+
+.feature-card.color-tools {
+    --card-color: #e83e8c;
+    --card-color-light: #f081a1;
 }
 
 .feature-card.coming-soon {
@@ -195,9 +205,9 @@
 
 .tech-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 1.5rem;
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 

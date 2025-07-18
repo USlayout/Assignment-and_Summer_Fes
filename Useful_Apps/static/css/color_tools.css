@@ -1,0 +1,642 @@
+/* 色彩ツール専用CSS - UIを他のページと統一 */
+
+/* 基本レイアウト */
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px 20px 0 0;
+    margin-top: 20px;
+    min-height: calc(100vh - 140px);
+}
+
+/* ヘッダースタイル */
+.main-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #2c3e50;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.main-subtitle {
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin-bottom: 0;
+}
+
+/* ナビゲーションタブ */
+.nav-tabs {
+    border-bottom: 3px solid #dee2e6;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    background: white;
+    border-radius: 15px 15px 0 0;
+    padding: 10px 20px 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-tabs .nav-item {
+    white-space: nowrap;
+}
+
+.nav-tabs .nav-link {
+    color: #6c757d;
+    border: none;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+    padding: 15px 20px;
+    font-weight: 500;
+    min-width: 120px;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+    margin: 0 5px;
+}
+
+.nav-tabs .nav-link:hover {
+    border-color: transparent;
+    color: #495057;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    transform: translateY(-2px);
+}
+
+.nav-tabs .nav-link.active {
+    color: #667eea;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(118, 75, 162, 0.15));
+    border-bottom: 3px solid #667eea;
+    font-weight: 600;
+}
+
+.card {
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-bottom: none;
+    font-weight: 600;
+    padding: 20px 25px;
+    border-radius: 20px 20px 0 0 !important;
+}
+
+.card-body {
+    padding: 25px;
+    background: white;
+}
+
+/* ボタンスタイル統一 */
+.btn {
+    border-radius: 25px;
+    font-weight: 500;
+    padding: 12px 25px;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.btn-info {
+    background: linear-gradient(135deg, #36d1dc 0%, #5b86e5 100%);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #a8a8a8 0%, #7b7b7b 100%);
+}
+
+.btn-dark {
+    background: linear-gradient(135deg, #434343 0%, #000000 100%);
+}
+
+/* フォームコントロール */
+.form-control,
+.form-select {
+    border-radius: 15px;
+    border: 2px solid #e9ecef;
+    padding: 12px 18px;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25);
+    background: white;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.form-control-color {
+    width: 60px;
+    height: 50px;
+    border-radius: 15px;
+    border: 2px solid #e9ecef;
+}
+
+.input-group .form-control-color + .form-control {
+    border-left: 2px solid #e9ecef;
+    border-radius: 0 15px 15px 0;
+}
+
+.input-group .form-control-color + .form-control {
+    border-left: none;
+}
+
+/* パレット表示スタイル */
+.palette-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.color-swatch {
+    position: relative;
+    width: 140px;
+    height: 100px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.color-swatch:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.color-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px;
+    font-size: 0.8em;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 0 0 20px 20px;
+}
+
+.color-swatch:hover .color-info {
+    opacity: 1;
+}
+
+/* 変換結果表示 */
+.conversion-result {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 20px;
+    padding: 25px;
+    margin: 15px 0;
+}
+
+.conversion-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 18px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    border-left: 5px solid #667eea;
+    transition: transform 0.2s ease;
+}
+
+.conversion-item:hover {
+    transform: translateX(5px);
+}
+
+.conversion-color-preview {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 3px solid white;
+}
+
+.conversion-details {
+    flex: 1;
+}
+
+.conversion-label {
+    font-weight: 600;
+    color: #495057;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.conversion-value {
+    font-family: 'Courier New', monospace;
+    font-size: 1.1em;
+    color: #212529;
+    font-weight: 500;
+}
+
+.copy-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 10px 12px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.copy-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* 色覚異常シミュレーション */
+.colorblind-comparison {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.colorblind-sample {
+    text-align: center;
+    padding: 15px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 150px;
+}
+
+.colorblind-color {
+    width: 100px;
+    height: 100px;
+    border-radius: 12px;
+    margin: 0 auto 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.colorblind-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 5px;
+}
+
+.colorblind-value {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    color: #6c757d;
+}
+
+.arrow-separator {
+    font-size: 2em;
+    color: #6c757d;
+    align-self: center;
+}
+
+/* ローディングアニメーション */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .colorblind-comparison {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .arrow-separator {
+        transform: rotate(90deg);
+        font-size: 1.5em;
+    }
+    
+    .palette-container {
+        justify-content: center;
+    }
+    
+    .color-swatch {
+        width: 100px;
+        height: 70px;
+    }
+    
+    .conversion-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .conversion-color-preview {
+        margin: 0 0 10px 0;
+    }
+}
+
+/* エラー・成功メッセージ */
+.alert-custom {
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-left: 4px solid #dc3545;
+}
+
+.alert-success {
+    background-color: #d1edff;
+    color: #0c5460;
+    border-left: 4px solid #0dcaf0;
+}
+
+/* ツールチップスタイル */
+.tooltip-inner {
+    background-color: #343a40;
+    color: white;
+    font-size: 0.875rem;
+}
+
+.tooltip .arrow::before {
+    border-top-color: #343a40;
+}
+
+/* フォーカス状態のスタイル改善 */
+.form-control:focus,
+.form-select:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+}
+
+.btn:focus {
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+}
+
+/* OpenCV機能用の新しいスタイル */
+.extracted-colors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.extracted-color-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.extracted-color-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.extracted-color-swatch {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
+}
+
+.extracted-color-info {
+    flex: 1;
+}
+
+.extracted-color-hex {
+    font-family: 'Courier New', monospace;
+    font-weight: 600;
+    font-size: 1.1em;
+    color: #212529;
+}
+
+.extracted-color-percentage {
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 4px;
+}
+
+/* ヒストグラム解析用スタイル */
+.statistics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.stat-card {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #007bff;
+}
+
+.stat-title {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-values {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85em;
+    color: #212529;
+}
+
+.stat-values div {
+    margin-bottom: 4px;
+}
+
+/* 色空間変換用スタイル */
+.colorspace-conversion-result {
+    padding: 20px 0;
+}
+
+.conversion-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #007bff;
+}
+
+/* スライダーのスタイル改善 */
+.form-range {
+    cursor: pointer;
+}
+
+.form-range::-webkit-slider-thumb {
+    background: #007bff;
+    border: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.form-range::-moz-range-thumb {
+    background: #007bff;
+    border: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* タブナビゲーションの改善 */
+.nav-tabs {
+    border-bottom: 2px solid #dee2e6;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+}
+
+.nav-tabs .nav-item {
+    white-space: nowrap;
+}
+
+.nav-tabs .nav-link {
+    padding: 12px 20px;
+    font-weight: 500;
+    min-width: 120px;
+    text-align: center;
+}
+
+/* レスポンシブ対応の改善 */
+@media (max-width: 768px) {
+    .extracted-colors-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .statistics-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .nav-tabs {
+        font-size: 0.9em;
+    }
+    
+    .nav-tabs .nav-link {
+        padding: 10px 15px;
+        min-width: 100px;
+    }
+    
+    .conversion-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .conversion-color-preview {
+        margin: 0 0 15px 0;
+    }
+    
+    .extracted-color-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .extracted-color-swatch {
+        margin: 0 0 10px 0;
+    }
+}
+
+/* アニメーション効果の追加 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.extracted-colors-result,
+.histogram-analysis-result,
+.colorspace-conversion-result {
+    animation: fadeInUp 0.5s ease;
+}
+
+/* プログレスバーのスタイル */
+.progress-container {
+    margin: 20px 0;
+}
+
+.progress {
+    height: 8px;
+    border-radius: 4px;
+    background-color: #e9ecef;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}

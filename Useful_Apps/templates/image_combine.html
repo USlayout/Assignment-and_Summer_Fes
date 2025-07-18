@@ -3,166 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>画像結合 - UsefulApp</title>
+    <title>画像結合ツール - UsefulApp</title>
+    {% load static %}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .upload-area {
-            border: 2px dashed #007bff;
-            border-radius: 10px;
-            padding: 40px;
-            text-align: center;
-            background-color: #f8f9fa;
-            transition: background-color 0.3s ease;
-        }
-        .upload-area:hover {
-            background-color: #e9ecef;
-        }
-        .upload-area.dragover {
-            background-color: #e3f2fd;
-            border-color: #2196f3;
-        }
-        .image-preview {
-            max-width: 150px;
-            max-height: 150px;
-            object-fit: contain;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .image-item {
-            position: relative;
-            display: inline-block;
-            margin: 10px;
-        }
-        .remove-btn {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: #dc3545;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 25px;
-            height: 25px;
-            font-size: 12px;
-            cursor: pointer;
-        }
-        .move-btn {
-            position: absolute;
-            bottom: -5px;
-            background: #6c757d;
-            color: white;
-            border: none;
-            border-radius: 3px;
-            padding: 2px 6px;
-            font-size: 10px;
-            cursor: pointer;
-        }
-        .combined-preview {
-            max-width: 100%;
-            max-height: 500px;
-            object-fit: contain;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="{% static 'css/image_combine.css' %}" rel="stylesheet">
 </head>
 <body>
+    <!-- ナビゲーションバー -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="{% url 'home' %}">UsefulApp</a>
-            <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="{% url 'home' %}">ホーム</a>
-                <a class="nav-link active" href="{% url 'image_combine' %}">画像結合</a>
+            <a class="navbar-brand fw-bold" href="{% url 'home' %}">
+                <i class="fas fa-toolbox me-2"></i>UsefulApp
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">
+                            <i class="fas fa-home me-1"></i>ホーム
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'image_combine' %}">
+                            <i class="fas fa-images me-1"></i>画像結合
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'qr_generator' %}">
+                            <i class="fas fa-qrcode me-1"></i>QRコード生成
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'color_tools' %}">
+                            <i class="fas fa-palette me-1"></i>色彩ツール
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="mb-4">🖼️ 画像結合ツール</h2>
-                
-                <!-- アップロードエリア -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h5 class="mb-0">1. 画像をアップロード</h5>
-                    </div>
-                    <div class="card-body">
-                        <form id="imageForm" method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <div class="upload-area" id="uploadArea">
-                                <input type="file" id="imageInput" name="images" multiple accept="image/*" style="display: none;">
-                                <div class="upload-content">
-                                    <i class="fas fa-cloud-upload-alt fa-3x text-primary mb-3"></i>
-                                    <h5>画像をドラッグ&ドロップ または クリックして選択</h5>
-                                    <p class="text-muted">複数の画像を一度に選択できます（JPG, PNG, BMP, TIFF対応）</p>
-                                    <button type="button" class="btn btn-primary" onclick="document.getElementById('imageInput').click()">
-                                        画像を選択
-                                    </button>
-                                </div>
+    <!-- メインコンテンツ -->
+    <main class="main-content">
+        <div class="container my-5">
+            <!-- ヘッダーセクション -->
+            <div class="text-center mb-5">
+                <h1 class="main-title">
+                    <i class="fas fa-images me-3"></i>画像結合ツール
+                </h1>
+                <p class="main-subtitle">複数の画像を簡単に結合・編集できるツール</p>
+            </div>
+
+            <!-- アップロードエリア -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-upload me-2"></i>1. 画像をアップロード</h5>
+                </div>
+                <div class="card-body">
+                    <form id="imageForm" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="upload-area" id="uploadArea">
+                            <input type="file" id="imageInput" name="images" multiple accept="image/*" style="display: none;">
+                            <div class="upload-content">
+                                <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                                <h5 class="upload-text">画像をドラッグ&ドロップ または クリックして選択</h5>
+                                <p class="upload-hint">複数の画像を一度に選択できます（JPG, PNG, BMP, TIFF対応）</p>
+                                <button type="button" class="btn btn-primary" onclick="document.getElementById('imageInput').click()">
+                                    <i class="fas fa-folder-open me-2"></i>画像を選択
+                                </button>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
+            </div>
 
-                <!-- 選択された画像一覧 -->
-                <div class="card mb-4" id="imageListCard" style="display: none;">
-                    <div class="card-header">
-                        <h5 class="mb-0">2. 選択された画像 <span id="imageCount" class="badge bg-primary">0</span></h5>
-                    </div>
-                    <div class="card-body">
-                        <div id="imageList" class="mb-3"></div>
-                        <button type="button" class="btn btn-danger btn-sm" onclick="clearImages()">全て削除</button>
-                    </div>
+            <!-- 選択された画像一覧 -->
+            <div class="card mb-4 fade-in" id="imageListCard" style="display: none;">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-list me-2"></i>2. 選択された画像 
+                        <span id="imageCount" class="badge bg-primary ms-2">0</span>
+                    </h5>
                 </div>
+                <div class="card-body">
+                    <div id="imageList" class="mb-3"></div>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="clearImages()">
+                        <i class="fas fa-trash me-2"></i>全て削除
+                    </button>
+                </div>
+            </div>
 
-                <!-- 結合設定 -->
-                <div class="card mb-4" id="settingsCard" style="display: none;">
-                    <div class="card-header">
-                        <h5 class="mb-0">3. 結合設定</h5>
-                    </div>
-                    <div class="card-body">
-                        <form id="combineForm">
-                            {% csrf_token %}
+            <!-- 結合設定 -->
+            <div class="card mb-4 fade-in" id="settingsCard" style="display: none;">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-cogs me-2"></i>3. 結合設定</h5>
+                </div>
+                <div class="card-body">
+                    <form id="combineForm">
+                        {% csrf_token %}
+                        <div class="settings-panel">
+                            <h6 class="settings-title">結合方向</h6>
                             <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label class="form-label">結合方向</label>
-                                    <div>
-                                        <div class="form-check form-check-inline">
+                                <div class="col-md-8">
+                                    <div class="d-flex flex-wrap gap-3">
+                                        <div class="form-check">
                                             <input class="form-check-input" type="radio" name="direction" value="horizontal" id="horizontal" checked>
-                                            <label class="form-check-label" for="horizontal">横並び</label>
+                                            <label class="form-check-label" for="horizontal">
+                                                <i class="fas fa-arrows-alt-h me-1"></i>横並び
+                                            </label>
                                         </div>
-                                        <div class="form-check form-check-inline">
+                                        <div class="form-check">
                                             <input class="form-check-input" type="radio" name="direction" value="vertical" id="vertical">
-                                            <label class="form-check-label" for="vertical">縦並び</label>
+                                            <label class="form-check-label" for="vertical">
+                                                <i class="fas fa-arrows-alt-v me-1"></i>縦並び
+                                            </label>
                                         </div>
-                                        <div class="form-check form-check-inline">
+                                        <div class="form-check">
                                             <input class="form-check-input" type="radio" name="direction" value="grid" id="grid">
-                                            <label class="form-check-label" for="grid">グリッド</label>
+                                            <label class="form-check-label" for="grid">
+                                                <i class="fas fa-th me-1"></i>グリッド
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6" id="gridSettings" style="display: none;">
+                                <div class="col-md-4" id="gridSettings" style="display: none;">
                                     <label for="gridCols" class="form-label">グリッド列数</label>
                                     <input type="number" class="form-control" id="gridCols" name="grid_cols" value="2" min="1" max="10">
                                 </div>
                             </div>
-                            
+                        </div>
+                        
+                        <div class="settings-panel">
+                            <h6 class="settings-title">サイズ調整</h6>
                             <div class="row mb-3">
                                 <div class="col-md-12">
-                                    <label class="form-label">サイズ調整</label>
-                                    <div>
-                                        <div class="form-check form-check-inline">
+                                    <div class="d-flex flex-wrap gap-3">
+                                        <div class="form-check">
                                             <input class="form-check-input" type="radio" name="resize_method" value="min" id="resizeMin" checked>
-                                            <label class="form-check-label" for="resizeMin">最小サイズに統一</label>
+                                            <label class="form-check-label" for="resizeMin">
+                                                <i class="fas fa-compress me-1"></i>最小サイズに統一
+                                            </label>
                                         </div>
-                                        <div class="form-check form-check-inline">
+                                        <div class="form-check">
                                             <input class="form-check-input" type="radio" name="resize_method" value="max" id="resizeMax">
-                                            <label class="form-check-label" for="resizeMax">最大サイズに統一</label>
+                                            <label class="form-check-label" for="resizeMax">
+                                                <i class="fas fa-expand me-1"></i>最大サイズに統一
+                                            </label>
                                         </div>
-                                        <div class="form-check form-check-inline">
+                                        <div class="form-check">
                                             <input class="form-check-input" type="radio" name="resize_method" value="fixed" id="resizeFixed">
-                                            <label class="form-check-label" for="resizeFixed">固定サイズ</label>
+                                            <label class="form-check-label" for="resizeFixed">
+                                                <i class="fas fa-crop me-1"></i>固定サイズ
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
@@ -178,39 +173,80 @@
                                     <input type="number" class="form-control" id="fixedHeight" name="fixed_height" value="300" min="1">
                                 </div>
                             </div>
-                            
-                            <div class="d-flex gap-2">
-                                <button type="button" class="btn btn-info" onclick="previewCombination()">プレビュー</button>
-                                <button type="button" class="btn btn-success" onclick="combineImages()">結合実行</button>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                        
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-warning" onclick="previewCombination()">
+                                <i class="fas fa-eye me-2"></i>プレビュー
+                            </button>
+                            <button type="button" class="btn btn-success" onclick="combineImages()">
+                                <i class="fas fa-magic me-2"></i>結合実行
+                            </button>
+                        </div>
+                    </form>
                 </div>
+            </div>
 
-                <!-- プレビュー結果 -->
-                <div class="card mb-4" id="previewCard" style="display: none;">
-                    <div class="card-header">
-                        <h5 class="mb-0">4. プレビュー結果</h5>
-                    </div>
-                    <div class="card-body text-center">
+            <!-- プレビュー結果 -->
+            <div class="card mb-4 fade-in" id="previewCard" style="display: none;">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-eye me-2"></i>4. プレビュー結果</h5>
+                </div>
+                <div class="card-body">
+                    <div class="result-area">
                         <div id="previewContent"></div>
                         <div id="previewInfo" class="mt-3"></div>
                     </div>
                 </div>
+            </div>
 
-                <!-- 結合結果 -->
-                <div class="card mb-4" id="resultCard" style="display: none;">
-                    <div class="card-header">
-                        <h5 class="mb-0">5. 結合完了</h5>
-                    </div>
-                    <div class="card-body text-center">
+            <!-- 結合結果 -->
+            <div class="card mb-4 fade-in" id="resultCard" style="display: none;">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-check-circle me-2"></i>5. 結合完了</h5>
+                </div>
+                <div class="card-body">
+                    <div class="result-area">
                         <div id="resultContent"></div>
                         <div id="downloadSection" class="mt-3"></div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer bg-dark text-light py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h6 class="fw-bold mb-3">
+                        <i class="fas fa-toolbox me-2"></i>UsefulApp
+                    </h6>
+                    <p class="mb-2">さまざまな便利なツールを提供するWebアプリケーション</p>
+                    <small class="text-muted">高度な画像処理と色彩解析機能を搭載</small>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="fw-bold mb-3">機能一覧</h6>
+                    <div class="footer-links">
+                        <a href="{% url 'home' %}" class="text-light d-block mb-2">
+                            <i class="fas fa-home me-2"></i>ホーム
+                        </a>
+                        <a href="{% url 'image_combine' %}" class="text-light d-block mb-2">
+                            <i class="fas fa-images me-2"></i>画像結合ツール
+                        </a>
+                        <a href="{% url 'color_tools' %}" class="text-light d-block mb-2">
+                            <i class="fas fa-palette me-2"></i>色彩ツール
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-3">
+            <div class="text-center">
+                <small>&copy; 2024 UsefulApp. All rights reserved.</small>
+            </div>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -275,12 +311,13 @@
                 imageList.innerHTML = selectedImages.map((img, index) => `
                     <div class="image-item">
                         <img src="${img.url}" class="image-preview" alt="画像${index + 1}">
-                        <button class="remove-btn" onclick="removeImage(${img.id})" title="削除">×</button>
-                        <div style="position: absolute; bottom: -25px; left: 0; right: 0; text-align: center;">
-                            <button class="move-btn" onclick="moveImage(${img.id}, -1)" ${index === 0 ? 'disabled' : ''}>↑</button>
-                            <button class="move-btn" onclick="moveImage(${img.id}, 1)" ${index === selectedImages.length - 1 ? 'disabled' : ''}>↓</button>
-                        </div>
-                        <div style="margin-top: 30px; text-align: center; font-size: 12px;">${img.file.name}</div>
+                        <button class="remove-btn" onclick="removeImage(${img.id})" title="削除">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <button class="move-btn" onclick="moveImage(${img.id}, -1)" ${index === 0 ? 'disabled' : ''} title="上へ移動">
+                            <i class="fas fa-arrow-up"></i>
+                        </button>
+                        <div style="position: absolute; bottom: -35px; left: 0; right: 0; text-align: center; font-size: 11px; color: #666; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${img.file.name}</div>
                     </div>
                 `).join('');
             } else {
@@ -395,28 +432,29 @@
             const previewContent = document.getElementById('previewContent');
             const previewInfo = document.getElementById('previewInfo');
             
-            previewContent.innerHTML = `<img src="data:image/jpeg;base64,${data.image_data}" class="combined-preview" alt="プレビュー">`;
+            previewContent.innerHTML = `<img src="data:image/jpeg;base64,${data.image_data}" class="result-image" alt="プレビュー">`;
             previewInfo.innerHTML = `
-                <p class="text-muted">結合後サイズ: ${data.width} × ${data.height} ピクセル</p>
-                <div class="mt-3">
-                    <div class="row justify-content-center mb-3">
-                        <div class="col-md-6">
-                            <label for="previewFileName" class="form-label">ファイル名（プレビューから保存）</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="previewFileName" value="preview_image" placeholder="ファイル名を入力">
-                                <select class="form-select" id="previewFormat" style="max-width: 120px;">
-                                    <option value="jpg">.jpg</option>
-                                    <option value="png">.png</option>
-                                    <option value="bmp">.bmp</option>
-                                    <option value="tiff">.tiff</option>
-                                </select>
-                            </div>
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    結合後サイズ: ${data.width} × ${data.height} ピクセル
+                </div>
+                <div class="row justify-content-center mb-3">
+                    <div class="col-md-6">
+                        <label for="previewFileName" class="form-label">ファイル名（プレビューから保存）</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="previewFileName" value="preview_image" placeholder="ファイル名を入力">
+                            <select class="form-select" id="previewFormat" style="max-width: 120px;">
+                                <option value="jpg">.jpg</option>
+                                <option value="png">.png</option>
+                                <option value="bmp">.bmp</option>
+                                <option value="tiff">.tiff</option>
+                            </select>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-outline-primary btn-sm" onclick="downloadFromPreview('${data.image_data}')">
-                        <i class="fas fa-download"></i> プレビューから保存
-                    </button>
                 </div>
+                <button type="button" class="btn btn-secondary" onclick="downloadFromPreview('${data.image_data}')">
+                    <i class="fas fa-download me-2"></i>プレビューから保存
+                </button>
             `;
             previewCard.style.display = 'block';
         }
@@ -427,18 +465,7 @@
             const format = document.getElementById('previewFormat').value;
             const fullFileName = `${fileName}.${format}`;
             
-            // ファイル名の検証
-            if (!fileName.trim()) {
-                alert('ファイル名を入力してください');
-                return;
-            }
-            
-            // 不正な文字をチェック
-            const invalidChars = /[<>:"/\\|?*]/;
-            if (invalidChars.test(fileName)) {
-                alert('ファイル名に使用できない文字が含まれています\n使用できない文字: < > : " / \\ | ? *');
-                return;
-            }
+            if (!validateFileName(fileName)) return;
             
             const link = document.createElement('a');
             link.href = `data:image/${format === 'jpg' ? 'jpeg' : format};base64,${imageData}`;
@@ -454,10 +481,15 @@
             const resultContent = document.getElementById('resultContent');
             const downloadSection = document.getElementById('downloadSection');
             
-            resultContent.innerHTML = `<img src="data:image/jpeg;base64,${data.image_data}" class="combined-preview" alt="結合結果">`;
+            resultContent.innerHTML = `<img src="data:image/jpeg;base64,${data.image_data}" class="result-image" alt="結合結果">`;
             downloadSection.innerHTML = `
-                <p class="text-success">✅ 画像の結合が完了しました！</p>
-                <p class="text-muted">結合後サイズ: ${data.width} × ${data.height} ピクセル</p>
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle me-2"></i>
+                    画像の結合が完了しました！
+                </div>
+                <div class="alert alert-info">
+                    結合後サイズ: ${data.width} × ${data.height} ピクセル
+                </div>
                 <div class="row justify-content-center mb-3">
                     <div class="col-md-6">
                         <label for="downloadFileName" class="form-label">ファイル名</label>
@@ -473,7 +505,7 @@
                     </div>
                 </div>
                 <button type="button" class="btn btn-primary" onclick="downloadImage('${data.image_data}')">
-                    <i class="fas fa-download"></i> 画像をダウンロード
+                    <i class="fas fa-download me-2"></i>画像をダウンロード
                 </button>
             `;
             resultCard.style.display = 'block';
@@ -485,18 +517,7 @@
             const format = document.getElementById('downloadFormat').value;
             const fullFileName = `${fileName}.${format}`;
             
-            // ファイル名の検証
-            if (!fileName.trim()) {
-                alert('ファイル名を入力してください');
-                return;
-            }
-            
-            // 不正な文字をチェック
-            const invalidChars = /[<>:"/\\|?*]/;
-            if (invalidChars.test(fileName)) {
-                alert('ファイル名に使用できない文字が含まれています\n使用できない文字: < > : " / \\ | ? *');
-                return;
-            }
+            if (!validateFileName(fileName)) return;
             
             const link = document.createElement('a');
             link.href = `data:image/${format === 'jpg' ? 'jpeg' : format};base64,${imageData}`;
@@ -504,6 +525,22 @@
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+        }
+
+        // ファイル名検証
+        function validateFileName(fileName) {
+            if (!fileName.trim()) {
+                alert('ファイル名を入力してください');
+                return false;
+            }
+            
+            const invalidChars = /[<>:"/\\|?*]/;
+            if (invalidChars.test(fileName)) {
+                alert('ファイル名に使用できない文字が含まれています\n使用できない文字: < > : " / \\ | ? *');
+                return false;
+            }
+            
+            return true;
         }
     </script>
 </body>

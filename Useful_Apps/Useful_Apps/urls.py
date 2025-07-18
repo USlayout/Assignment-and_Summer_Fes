@@ -16,11 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Useful_Apps.views import top_page, image_combine
+from Useful_Apps.views import top_page, image_combine, qr_generator, download_qr, color_tools
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', top_page, name='home'),  # ルートURLをトップページに設定
     path('useful_App/', top_page, name='top_page'),
     path('image-combine/', image_combine, name='image_combine'),
+    path('qr-generator/', qr_generator, name='qr_generator'),
+    path('download-qr/', download_qr, name='download_qr'),
+    path('color-tools/', color_tools, name='color_tools'),
 ]

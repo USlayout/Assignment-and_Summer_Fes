@@ -13,20 +13,33 @@
     <!-- ナビゲーションバー -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="{% url 'home' %}">UsefulApp</a>
+            <a class="navbar-brand fw-bold" href="{% url 'home' %}">
+                <i class="fas fa-toolbox me-2"></i>UsefulApp
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}">ホーム</a>
+                        <a class="nav-link active" href="{% url 'home' %}">
+                            <i class="fas fa-home me-1"></i>ホーム
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'image_combine' %}">画像結合</a>
+                        <a class="nav-link" href="{% url 'image_combine' %}">
+                            <i class="fas fa-images me-1"></i>画像結合
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#dictionary">辞書検索</a>
+                        <a class="nav-link" href="{% url 'qr_generator' %}">
+                            <i class="fas fa-qrcode me-1"></i>QRコード生成
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'color_tools' %}">
+                            <i class="fas fa-palette me-1"></i>色彩ツール
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -37,8 +50,8 @@
     <section class="hero-section">
         <div class="container">
             <h1 class="hero-title">UsefulApp</h1>
-            <p class="hero-subtitle">画像結合と辞書検索の便利なWebアプリケーション</p>
-            <p class="hero-description">Djangoで構築された多機能ツール</p>
+            <p class="hero-subtitle">画像結合・QRコード生成・色彩ツールの便利なWebアプリケーション</p>
+            <p class="hero-description">Djangoで構築された多機能ツール - OpenCVとscikit-learnを活用した高度な機能を搭載</p>
         </div>
     </section>
 
@@ -67,7 +80,25 @@
                     </div>
                 </a>
 
-                <!-- 辞書検索機能 -->
+                <!-- QRコード生成機能 -->
+                <a href="{% url 'qr_generator' %}" class="feature-card-link">
+                    <div class="feature-card qr-generator" data-feature="qr-generator">
+                        <div class="feature-icon">📱</div>
+                        <h4 class="feature-title">QRコード生成機能</h4>
+                        <p class="feature-description">
+                            テキスト、URL、WiFi情報などを簡単にQRコードに変換。
+                            サイズ調整やエラー訂正レベルの設定も可能です。
+                        </p>
+                        <ul class="feature-tags">
+                            <li>多様なQRコードタイプ</li>
+                            <li>カスタマイズ可能</li>
+                            <li>高品質PNG出力</li>
+                        </ul>
+                        <span class="feature-btn btn-primary-custom">QRコード生成を開始</span>
+                    </div>
+                </a>
+
+                <!-- 辞書検索機能（開発中） -->
                 <div class="feature-card-link coming-soon-trigger" data-feature="dictionary">
                     <div class="feature-card dictionary">
                         <div class="feature-icon">📚</div>
@@ -84,6 +115,25 @@
                         <span class="feature-btn btn-secondary-custom">近日公開予定</span>
                     </div>
                 </div>
+
+                <!-- 色彩ツール機能 -->
+                <a href="{% url 'color_tools' %}" class="feature-card-link">
+                    <div class="feature-card color-tools" data-feature="color-tools">
+                        <div class="feature-icon">🎨</div>
+                        <h4 class="feature-title">色彩ツール機能</h4>
+                        <p class="feature-description">
+                            カラーパレット生成、色形式変換、色覚異常シミュレーション。
+                            OpenCVによる高度な画像解析機能を搭載した総合色彩ツール。
+                        </p>
+                        <ul class="feature-tags">
+                            <li>支配的な色の抽出</li>
+                            <li>色ヒストグラム解析</li>
+                            <li>色空間変換</li>
+                            <li>色彩パレット生成</li>
+                        </ul>
+                        <span class="feature-btn btn-primary-custom">色彩ツールを開始</span>
+                    </div>
+                </a>
 
                 <!-- 将来の機能1 -->
                 <div class="feature-card-link coming-soon-trigger" data-feature="text-tools">
@@ -128,23 +178,39 @@
     <section class="tech-section">
         <div class="container">
             <h3 class="section-title">使用技術</h3>
-            <p class="section-subtitle">モダンな技術スタックで構築</p>
+            <p class="section-subtitle">8つのライブラリで構築された高機能アプリ</p>
             <div class="tech-grid">
                 <div class="tech-item">
                     <h5 class="tech-name">Django</h5>
                     <p class="tech-description">Webフレームワーク</p>
                 </div>
                 <div class="tech-item">
-                    <h5 class="tech-name">SQLite3</h5>
-                    <p class="tech-description">データベース</p>
+                    <h5 class="tech-name">OpenCV</h5>
+                    <p class="tech-description">画像解析・色空間変換</p>
+                </div>
+                <div class="tech-item">
+                    <h5 class="tech-name">scikit-learn</h5>
+                    <p class="tech-description">機械学習（K-means）</p>
+                </div>
+                <div class="tech-item">
+                    <h5 class="tech-name">matplotlib</h5>
+                    <p class="tech-description">グラフ描画</p>
                 </div>
                 <div class="tech-item">
                     <h5 class="tech-name">Pillow</h5>
                     <p class="tech-description">画像処理</p>
                 </div>
                 <div class="tech-item">
-                    <h5 class="tech-name">Requests</h5>
-                    <p class="tech-description">API連携</p>
+                    <h5 class="tech-name">qrcode</h5>
+                    <p class="tech-description">QRコード生成</p>
+                </div>
+                <div class="tech-item">
+                    <h5 class="tech-name">numpy</h5>
+                    <p class="tech-description">数値計算</p>
+                </div>
+                <div class="tech-item">
+                    <h5 class="tech-name">colorsys</h5>
+                    <p class="tech-description">色空間変換</p>
                 </div>
             </div>
         </div>
